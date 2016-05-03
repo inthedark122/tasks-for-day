@@ -1,0 +1,1 @@
+json.tasks @tasks, :id, :name, :description, :started_at, :finished_at

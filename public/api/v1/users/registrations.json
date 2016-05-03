@@ -9,6 +9,18 @@
       "operations": [
         {
           "summary": "Creates a new User",
+          "responseMessages": [
+            {
+              "code": 201,
+              "responseModel": null,
+              "message": "Created"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
           "parameters": [
             {
               "paramType": "form",
@@ -23,18 +35,6 @@
               "type": "string",
               "description": "Password",
               "required": true
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 201,
-              "responseModel": null,
-              "message": "Created"
-            },
-            {
-              "code": 422,
-              "responseModel": null,
-              "message": "Unprocessable Entity"
             }
           ],
           "nickname": "Api::V1::Users::Registrations#create",

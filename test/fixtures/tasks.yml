@@ -1,0 +1,11 @@
+start:
+  name: Test
+  description: New taks
+
+finish:
+  name: Test
+  description: New taks
+
+delete:
+  name: Test
+  description: New taks

@@ -1,8 +1,12 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "/",
+  "basePath": "http://tasks-for-day.herokuapp.com",
   "apis": [
+    {
+      "path": "/api/v1/tasks.{format}",
+      "description": "Task Management"
+    },
     {
       "path": "/api/v1/users/registrations.{format}",
       "description": "User Management"

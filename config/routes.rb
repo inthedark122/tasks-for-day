@@ -12,6 +12,13 @@ Rails.application.routes.draw do
 
   namespace :'api/v1', path: 'api/v1', as: :api_v1 do
 
+    resources :tasks do
+      member do
+        patch :start
+        patch :finish
+      end
+    end
+
     # User config
     as :user do
       # registration
