@@ -1,8 +1,15 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
-  def new
-    redirect_to unauthenticated_root_path if !request.xhr?
-  end
+  skip_before_action :verify_authenticity_token
 
+  swagger_controller :users, 'User Management'
+
+  swagger_api :create do
+    summary 'Sign in'
+    param :form, 'user[email]', :string, :required, 'Email address'
+    param :form, 'user[password]', :string, :required, 'Password'
+    response :ok
+    response :unauthorized
+  end
   def create
     user = User.find_by(email: sign_in_params[:email])
     if user && user.valid_password?(sign_in_params[:password])

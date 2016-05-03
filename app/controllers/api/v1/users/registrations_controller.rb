@@ -1,9 +1,15 @@
 class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :verify_authenticity_token
 
-  def new
-    redirect_to unauthenticated_root_path if !request.xhr?
+  swagger_controller :users, 'User Management'
+
+  swagger_api :create do
+    summary 'Creates a new User'
+    param :form, 'user[email]', :string, :required, 'Email address'
+    param :form, 'user[password]', :string, :required, 'Password'
+    response :created
+    response :unprocessable_entity
   end
-
   def create
     build_resource(sign_up_params)
 
@@ -31,6 +37,8 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
+  private
 
   def sign_up_params
     params.require(:user).permit(:email,
