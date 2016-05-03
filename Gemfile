@@ -57,3 +57,6 @@ end
 
 # Create User
 gem 'devise'
+
+# Api documentation
+gem 'swagger-docs'
