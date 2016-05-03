@@ -6,10 +6,7 @@ class Api::V1::Users::SessionsControllerTest < ActionController::TestCase
     User.create(
         email: 'foo@bar.com',
         password: '11111111',
-        password_confirmation: '11111111',
-        last_name: 'Foo',
-        username: 'for bar 111',
-        name: 'Bar'
+        password_confirmation: '11111111'
     )
 
     @valid_params = {
@@ -31,15 +28,15 @@ class Api::V1::Users::SessionsControllerTest < ActionController::TestCase
     User.destroy_all
   end
 
-  # test 'xhr success sign in' do
-  #   xhr :post, :create, @valid_params
-  #
-  #   assert_response 200
-  # end
-  #
-  # test 'xhr failure sign in' do
-  #   xhr :post, :create, @invalid_params
-  #
-  #   assert_response 401
-  # end
+  test 'xhr success sign in' do
+    xhr :post, :create, @valid_params
+
+    assert_response 200
+  end
+
+  test 'xhr failure sign in' do
+    xhr :post, :create, @invalid_params
+
+    assert_response 401
+  end
 end

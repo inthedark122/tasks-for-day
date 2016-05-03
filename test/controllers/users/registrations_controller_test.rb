@@ -29,11 +29,11 @@ class Api::V1::Users::RegistrationsControllerTest < ActionController::TestCase
   end
 
 
-  # test 'xhr failure sign up without params' do
-  #   assert_no_difference 'User.count', 0 do
-  #     xhr :post, :create, @empty_params
-  #
-  #     assert_response 422
-  #   end
-  # end
+  test 'xhr failure sign up without params' do
+    assert_no_difference 'User.count', 0 do
+      xhr :post, :create, @empty_params
+
+      assert_response 422
+    end
+  end
 end
