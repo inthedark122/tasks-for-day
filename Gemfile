@@ -45,3 +45,15 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'minitest'
+  gem 'minitest-rails'
+  gem 'minitest-rails-capybara'
+  gem 'capybara'
+  gem 'capybara-screenshot', '~> 0.3.21'
+end
+
+# Other custom gems
+
+# Create User
+gem 'devise'
