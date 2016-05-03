@@ -14,7 +14,7 @@
   ],
   "authorizations": null,
   "info": {
-    "title": "Swagger Sample App",
-    "description": "This is a sample description."
+    "title": "Tasks for the day",
+    "description": "Create a new task."
   }
 }
