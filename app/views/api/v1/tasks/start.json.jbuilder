@@ -1,1 +1,1 @@
-json.(@task, :id, :name, :started_at, :finished_at)
+json.(@task, :id, :name, :started_at, :finished_at, :active_time)

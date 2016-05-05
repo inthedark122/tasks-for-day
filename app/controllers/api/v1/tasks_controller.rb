@@ -45,7 +45,15 @@ class Api::V1::TasksController < ApiController
   end
   def finish
     @task = Task.find(params[:id])
-    if @task.update_attribute(:finished_at, Time.now)
+    if @task.started_at.nil?
+      render json: { errors: ['Task already finished'] }, status: :unprocessable_entity
+      return false
+    end
+    @task.finished_at = Time.now
+    @task.active_time += (@task.finished_at - @task.started_at).round
+    @task.started_at = nil
+
+    if @task.save
       render :start
     else
       render json: {}, status: :unprocessable_entity
