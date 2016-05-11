@@ -60,3 +60,7 @@ gem 'devise'
 
 # Api documentation
 gem 'swagger-docs'
+
+# Ember
+gem 'ember-cli-rails'
+gem 'rails_12factor', group: [:staging, :production]
