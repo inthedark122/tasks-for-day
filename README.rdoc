@@ -23,10 +23,10 @@ Things you may want to cover:
 {Source}[https://github.com/thoughtbot/ember-cli-rails#heroku]
 
 For deploy the project you shoul add heroku remove with command:
-+heroku git:remote+
+<tt>heroku git:remote</tt>
 
 And run command to deploy the project to heroku:
-+git push heroku master+
+<tt>git push heroku master</tt>
 
 * ...
 
