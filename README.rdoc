@@ -23,9 +23,11 @@ Things you may want to cover:
 {Source}[https://github.com/thoughtbot/ember-cli-rails#heroku]
 
 For deploy the project you shoul add heroku remove with command:
-<tt>heroku git:remote</tt>
+
+<tt>heroku git:remote -a tasks-for-day</tt>
 
 And run command to deploy the project to heroku:
+
 <tt>git push heroku master</tt>
 
 * ...
