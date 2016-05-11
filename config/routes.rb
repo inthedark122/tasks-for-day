@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount_ember_app :frontend, to: '/'
+
   devise_for :users, only: []
   as :users do
     authenticated :users do
