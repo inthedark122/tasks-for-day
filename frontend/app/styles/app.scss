@@ -1,0 +1,11 @@
+@import "variables";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.ember-application {
+  color: $app-color;
+  background-color: $app-bg-color;
+}
