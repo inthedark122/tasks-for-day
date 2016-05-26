@@ -8,7 +8,7 @@ class ApiController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :exception_not_found
 
   def exception_not_found
-    render json: { errors: ['Not found']}, status: :unprocessable_entity
+    render json: { errors: [{ message: ['Not found'] }]}, status: :unprocessable_entity
   end
 
   def cors_set_access_control_headers

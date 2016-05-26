@@ -6,6 +6,7 @@ class Api::V1::TasksController < ApiController
     summary 'Get all tasks'
     response :ok
   end
+
   def index
     @tasks = Task.all
   end
@@ -17,10 +18,11 @@ class Api::V1::TasksController < ApiController
     response :ok
     response :unprocessable_entity
   end
+
   def create
     @task = Task.new task_params
     unless @task.save
-      render json: { errors: @task.errors }, status: :unprocessable_entity
+      render json: {errors: [{task: @task.errors}]}, status: :unprocessable_entity
     end
   end
 
@@ -30,6 +32,7 @@ class Api::V1::TasksController < ApiController
     response :ok
     response :unprocessable_entity
   end
+
   def start
     @task = Task.find(params[:id])
     unless @task.update_attribute(:started_at, Time.now)
@@ -43,10 +46,11 @@ class Api::V1::TasksController < ApiController
     response :ok
     response :unprocessable_entity
   end
+
   def finish
     @task = Task.find(params[:id])
     if @task.started_at.nil?
-      render json: { errors: ['Task already finished'] }, status: :unprocessable_entity
+      render json: {errors: [{messages: ['Task already finished']}]}, status: :unprocessable_entity
       return false
     end
     @task.finished_at = Time.now
@@ -66,6 +70,7 @@ class Api::V1::TasksController < ApiController
     response :ok
     response :unprocessable_entity
   end
+
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
