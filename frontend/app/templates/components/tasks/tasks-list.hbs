@@ -1,0 +1,21 @@
+<table class="task-list" style="width:100%; text-align: center;">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  {{#each tasks as |task|}}
+    <tr>
+      <td>{{task.name}}</td>
+      <td>{{task.description}}</td>
+      <td>
+        <button {{action "deleteTask" task }}>Delete</button>
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
