@@ -1,12 +1,12 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('tasks', 'Unit | Model | tasks', {
+moduleForModel('task', 'Unit | Model | tasks', {
   // Specify the other units that are required for this test.
   needs: []
 });
 
 test('it exists', function(assert) {
-  let model = this.subject();
+  let model = this.subject({ title: 'First title' });
   // let store = this.store();
   assert.ok(!!model);
 });

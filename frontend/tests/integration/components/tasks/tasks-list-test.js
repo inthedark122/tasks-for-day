@@ -6,19 +6,7 @@ moduleForComponent('tasks/tasks-list', 'Integration | Component | tasks/tasks li
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{tasks/tasks-list}}`);
+  assert.equal(this.$('th').last().text().trim(), 'Actions');
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#tasks/tasks-list}}
-      template block text
-    {{/tasks/tasks-list}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
