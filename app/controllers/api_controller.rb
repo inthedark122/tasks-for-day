@@ -6,9 +6,19 @@ class ApiController < ApplicationController
 
 
   rescue_from ActiveRecord::RecordNotFound, with: :exception_not_found
+  rescue_from CanCan::AccessDenied, with: :exception_need_auth
 
-  def exception_not_found
-    render json: { errors: [{ message: ['Not found'] }]}, status: :unprocessable_entity
+  def exception_not_found exception
+    render json: {errors: [{message: [exception.message]}]}, status: :unprocessable_entity
+  end
+
+  def exception_need_auth
+    render json: {errors: [{message: ['Need auth']}]}, status: :unprocessable_entity
+  end
+
+  def self.add_common_response(api)
+    api.response :ok
+    api.response :unprocessable_entity
   end
 
   def cors_set_access_control_headers

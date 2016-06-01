@@ -1,6 +1,11 @@
 class Api::V1::TasksController < ApiController
+  # authorize_resource
 
   swagger_controller :tasks, 'Task Management'
+  def self.add_common_params(api)
+    api.param :form, 'task[name]', :string, :required, 'Task name'
+    api.param :form, 'task[description]', :string, :required, 'Description about task'
+  end
 
   swagger_api :index do
     summary 'Get all tasks'
@@ -11,26 +16,47 @@ class Api::V1::TasksController < ApiController
     @tasks = Task.all
   end
 
-  swagger_api :create do
+  swagger_api :show do |api|
+    summary 'Get one task'
+    param :path, :id, :integer, :required, 'Task id'
+    ApiController::add_common_response(api)
+  end
+
+  def show
+    @task = Task.find(params[:id])
+  end
+
+  swagger_api :create do |api|
     summary 'Creates a new Task'
-    param :form, 'task[name]', :string, :required, 'Task name'
-    param :form, 'task[description]', :string, :required, 'Description about task'
-    response :ok
-    response :unprocessable_entity
+    Api::V1::TasksController::add_common_params(api)
+    ApiController::add_common_response(api)
   end
 
   def create
     @task = Task.new task_params
     unless @task.save
+      render json: {errors: [@task.errors.to_h]}, status: :unprocessable_entity
+    end
+  end
+
+  swagger_api :update do |api|
+    summary 'Update task'
+    param :path, :id, :integer, :required, 'Task id'
+    Api::V1::TasksController::add_common_params(api)
+    ApiController::add_common_response(api)
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    unless @task.update_attributes task_params
       render json: {errors: [{task: @task.errors}]}, status: :unprocessable_entity
     end
   end
 
-  swagger_api :start do
+  swagger_api :start do |api|
     summary 'Start the task'
     param :path, :id, :integer, :required, 'Task id'
-    response :ok
-    response :unprocessable_entity
+    ApiController::add_common_response(api)
   end
 
   def start
@@ -40,11 +66,10 @@ class Api::V1::TasksController < ApiController
     end
   end
 
-  swagger_api :finish do
+  swagger_api :finish do |api|
     summary 'Finish the task'
     param :path, :id, :integer, :required, 'Task id'
-    response :ok
-    response :unprocessable_entity
+    ApiController::add_common_response(api)
   end
 
   def finish
@@ -64,11 +89,10 @@ class Api::V1::TasksController < ApiController
     end
   end
 
-  swagger_api :destroy do
+  swagger_api :destroy do |api|
     summary 'Delete the task'
     param :path, :id, :integer, :required, 'Task id'
-    response :ok
-    response :unprocessable_entity
+    ApiController::add_common_response(api)
   end
 
   def destroy
