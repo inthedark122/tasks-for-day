@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160505203514) do
   enable_extension "plpgsql"
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.string   "name"
     t.string   "description"
     t.datetime "started_at"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160505203514) do
     t.integer  "active_time", default: 0
   end
 
-  add_index "tasks", ["users_id"], name: "index_tasks_on_users_id", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
