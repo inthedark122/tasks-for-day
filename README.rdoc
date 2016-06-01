@@ -38,10 +38,13 @@ Please feel free to use a different markup language if you do not plan to run
 
 ==== Migrate database
 For migrate the database you should login to heroku app
+
 <tt>heroku login</tt>
 
 And run command for migrate you application
-<tt>heroku run rake db:migrate --app=tasks-for-day<tt>
+
+<tt>heroku run rake db:migrate --app=tasks-for-day</tt>
 
 You also can add the default data to database
+
 <tt>heroku run rake db:seed --app=tasks-for-day</tt>
