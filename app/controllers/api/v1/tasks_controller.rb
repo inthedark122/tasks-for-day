@@ -1,17 +1,12 @@
 class Api::V1::TasksController < ApiController
-  # authorize_resource
+  authorize_resource only: [:current]
 
   swagger_controller :tasks, 'Task Management'
-  def self.add_common_params(api)
-    api.param :form, 'task[name]', :string, :required, 'Task name'
-    api.param :form, 'task[description]', :string, :required, 'Description about task'
-  end
 
   swagger_api :index do
     summary 'Get all tasks'
     response :ok
   end
-
   def index
     @tasks = Task.all
   end
@@ -21,9 +16,17 @@ class Api::V1::TasksController < ApiController
     param :path, :id, :integer, :required, 'Task id'
     ApiController::add_common_response(api)
   end
-
   def show
     @task = Task.find(params[:id])
+  end
+
+  swagger_api :current do |api|
+    summary 'Get all tasks for current user'
+    ApiController::add_common_response(api)
+  end
+  def current
+    @tasks = current_user.tasks
+    render :index
   end
 
   swagger_api :create do |api|
@@ -31,7 +34,6 @@ class Api::V1::TasksController < ApiController
     Api::V1::TasksController::add_common_params(api)
     ApiController::add_common_response(api)
   end
-
   def create
     @task = Task.new task_params
     unless @task.save
@@ -45,7 +47,6 @@ class Api::V1::TasksController < ApiController
     Api::V1::TasksController::add_common_params(api)
     ApiController::add_common_response(api)
   end
-
   def update
     @task = Task.find(params[:id])
     unless @task.update_attributes task_params
@@ -58,7 +59,6 @@ class Api::V1::TasksController < ApiController
     param :path, :id, :integer, :required, 'Task id'
     ApiController::add_common_response(api)
   end
-
   def start
     @task = Task.find(params[:id])
     unless @task.update_attribute(:started_at, Time.now)
@@ -71,7 +71,6 @@ class Api::V1::TasksController < ApiController
     param :path, :id, :integer, :required, 'Task id'
     ApiController::add_common_response(api)
   end
-
   def finish
     @task = Task.find(params[:id])
     if @task.started_at.nil?
@@ -94,7 +93,6 @@ class Api::V1::TasksController < ApiController
     param :path, :id, :integer, :required, 'Task id'
     ApiController::add_common_response(api)
   end
-
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
@@ -102,6 +100,13 @@ class Api::V1::TasksController < ApiController
     else
       render josn: {}, status: :unprocessable_entity
     end
+  end
+
+  protected
+
+  def self.add_common_params(api)
+    api.param :form, 'task[name]', :string, :required, 'Task name'
+    api.param :form, 'task[description]', :string, :required, 'Description about task'
   end
 
   private

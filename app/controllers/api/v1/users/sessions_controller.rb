@@ -22,6 +22,11 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     end
   end
 
+  swagger_api :destroy do |api|
+    summary 'Log out'
+    response :ok
+    response :unauthorized
+  end
   def destroy
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
     set_flash_message :notice, :signed_out if signed_out && is_flashing_format?

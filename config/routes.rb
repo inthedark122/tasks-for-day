@@ -19,12 +19,23 @@ Rails.application.routes.draw do
         patch :start
         patch :finish
       end
+
+      collection do
+        get 'current'
+        get 'access'
+      end
+    end
+
+    resources :users, only: [:index] do
+
     end
 
     # User config
     as :user do
       # registration
       post 'sign_up' => 'users/registrations#create', :as => :user_registration
+      patch 'update', to: 'users/registrations#update'
+      put 'update', to: 'users/registrations#update'
       delete 'destroy' => 'users/registrations#destroy', :as => :destroy_user_registration
 
       # session

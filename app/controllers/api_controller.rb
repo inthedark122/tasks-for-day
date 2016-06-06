@@ -13,7 +13,7 @@ class ApiController < ApplicationController
   end
 
   def exception_need_auth
-    render json: {errors: [{message: ['Need auth']}]}, status: :unprocessable_entity
+    render json: {errors: [{message: ['Need auth']}]}, status: :unauthorized
   end
 
   def self.add_common_response(api)

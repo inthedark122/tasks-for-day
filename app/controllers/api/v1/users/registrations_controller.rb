@@ -3,10 +3,9 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
 
   swagger_controller :users, 'User Management'
 
-  swagger_api :create do
+  swagger_api :create do |api|
     summary 'Creates a new User'
-    param :form, 'user[email]', :string, :required, 'Email address'
-    param :form, 'user[password]', :string, :required, 'Password'
+    Api::V1::Users::RegistrationsController::add_common_params(api)
     response :created
     response :unprocessable_entity
   end
@@ -17,15 +16,21 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       set_flash_message :notice, :signed_up if is_flashing_format?
       sign_up(resource_name, resource)
       @success_path = after_sign_in_path_for(resource)
-      render json: resource, status: 201
+      render json: resource, status: :created
     else
       @errors = resource.errors
       warden.custom_failure!
 
-      render json: { errors: @errors }, status: 422
+      render json: { errors: @errors }, status: :unprocessable_entity
     end
   end
 
+  swagger_api :update do |api|
+    summary 'Update User'
+    Api::V1::Users::RegistrationsController::add_common_params(api)
+    response :ok
+    response :unprocessable_entity
+  end
   def update
     resource_updated = resource.update(sign_up_params)
 
@@ -36,6 +41,13 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with resource
     end
+  end
+
+  protected
+
+  def self.add_common_params(api)
+    api.param :form, 'user[email]', :string, :required, 'Email address'
+    api.param :form, 'user[password]', :string, :required, 'Password'
   end
 
   private
