@@ -8,6 +8,10 @@
       "description": "Task Management"
     },
     {
+      "path": "/api/v1/users.{format}",
+      "description": "User Management"
+    },
+    {
       "path": "/api/v1/users/registrations.{format}",
       "description": "User Management"
     },

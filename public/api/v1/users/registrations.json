@@ -41,6 +41,44 @@
           "method": "post"
         }
       ]
+    },
+    {
+      "path": "/api/v1/update",
+      "operations": [
+        {
+          "summary": "Update User",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "user[email]",
+              "type": "string",
+              "description": "Email address",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "user[password]",
+              "type": "string",
+              "description": "Password",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Users::Registrations#update",
+          "method": "patch"
+        }
+      ]
     }
   ],
   "authorizations": null

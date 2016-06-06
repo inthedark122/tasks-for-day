@@ -41,6 +41,28 @@
           "method": "post"
         }
       ]
+    },
+    {
+      "path": "/api/v1/signout",
+      "operations": [
+        {
+          "summary": "Log out",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "nickname": "Api::V1::Users::Sessions#destroy",
+          "method": "delete"
+        }
+      ]
     }
   ],
   "authorizations": null

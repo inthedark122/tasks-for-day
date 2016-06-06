@@ -67,6 +67,28 @@
       ]
     },
     {
+      "path": "/api/v1/tasks/current",
+      "operations": [
+        {
+          "summary": "Get all tasks for current user",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "nickname": "Api::V1::Tasks#current",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/api/v1/tasks",
       "operations": [
         {
