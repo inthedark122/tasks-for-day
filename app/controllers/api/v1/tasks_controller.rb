@@ -36,6 +36,7 @@ class Api::V1::TasksController < ApiController
   end
   def create
     @task = Task.new task_params
+    @task.user = current_user
     unless @task.save
       render json: {errors: [@task.errors.to_h]}, status: :unprocessable_entity
     end
